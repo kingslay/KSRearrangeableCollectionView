@@ -8,9 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, KDRearrangeableCollectionViewDelegate, UICollectionViewDataSource {
-    
-    @IBOutlet weak var collectionView: UICollectionView!
+class ViewController: UICollectionViewController, KDRearrangeableCollectionViewDelegate {
     
     lazy var data : [String] = {
         
@@ -37,17 +35,17 @@ class ViewController: UIViewController, KDRearrangeableCollectionViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.addMoveGestureRecognizerForPan()
+        self.collectionView!.addMoveGestureRecognizerForPan()
     }
 
     // MARK: - UICollectionViewDataSource
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.data.count
     }
     
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = self.collectionView.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as! CollectionViewCell
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = self.collectionView!.dequeueReusableCellWithReuseIdentifier("CollectionViewCell", forIndexPath: indexPath) as! CollectionViewCell
         let name = self.data[indexPath.item]
         cell.titleLabel.text = name
         return cell
