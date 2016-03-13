@@ -48,12 +48,12 @@ extension UICollectionView: UIGestureRecognizerDelegate {
     // MARK: - UIGestureRecognizerDelegate
     
     public override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        let pointPressedInCollectionView = gestureRecognizer.locationInView(self)
-        if let indexPath = self.indexPathForItemAtPoint(pointPressedInCollectionView),cell = self.cellForItemAtIndexPath(indexPath) {
+        let pointPressedPoint = gestureRecognizer.locationInView(self)
+        if let indexPath = self.indexPathForItemAtPoint(pointPressedPoint),cell = self.cellForItemAtIndexPath(indexPath) {
             let representationImage = cell.snapshotViewAfterScreenUpdates(true)
             representationImage.frame = cell.frame
             
-            let offset = CGPointMake(pointPressedInCollectionView.x - representationImage.frame.origin.x, pointPressedInCollectionView.y - representationImage.frame.origin.y)
+            let offset = CGPointMake(pointPressedPoint.x - representationImage.frame.origin.x, pointPressedPoint.y - representationImage.frame.origin.y)
             
             self.bundle = Bundle(offset: offset, sourceCell: cell, representationImageView:representationImage, currentIndexPath: indexPath)
         }
